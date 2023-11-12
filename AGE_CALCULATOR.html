@@ -1,0 +1,64 @@
+<html>  
+    <head>  
+   
+    </head>  
+    <body>  
+    <div  align="center" style="padding-top: 10%;">  
+    <h2 style="color: #008CBA"> Calculate Age from Date of Birth <br> <br> </h2>   
+      
+    <b> Enter Date of Birth: <input type=date id = "DataOfBirth">  </b>  
+    <span id = "message" style="color:red"> </span> <br><br>    
+    <button type="submit" onclick = "ageCalculator()"> Calculate age </button> <br><br>  
+    <h3 style="color:#008CBA" id="result" ></h3>   
+    <h3 style="color:#ba0000" id="result2" ></h3>   
+    </div>  
+    </body>  
+    <script>  
+      
+        function ageCalculator() {   
+            var userinput = document.getElementById("DataOfBirth").value;  
+            var DataOfBirth = new Date(userinput);  
+               
+            if(userinput==null || userinput==''){  
+              document.getElementById("message").innerHTML = "Choose a date of Birth please!";    
+              return false;   
+            }   
+                  
+            else {   
+                document.getElementById("message").innerHTML="";
+            var myDate = userinput.toString();  
+            var DataOfBirthYear = parseInt(myDate.substring(0,4), 10);  
+            var DataOfBirthMonth = parseInt(myDate.substring(5,7), 10);  
+            var DataOfBirthDay = parseInt(myDate.substring(8,10), 10);  
+               
+            var today = new Date();   
+            var birthday = new Date(DataOfBirthYear, DataOfBirthMonth-1, DataOfBirthDay);  
+               
+            var diffInMillisecond = today.valueOf() - birthday.valueOf();  
+                  
+            var year_age = Math.floor(diffInMillisecond / 31536000000);  
+            var day_age = Math.floor((diffInMillisecond % 31536000000) / 86400000);  
+                
+            if ((today.getMonth() == birthday.getMonth()) && (today.getDate() == birthday.getDate())) {  
+                    alert("Happy Birthday!");  
+                }  
+                  
+             var month_age = Math.floor(day_age/30);          
+                day_age = day_age % 30;  
+                  
+             var todayMonth= (month_age + (year_age*12));  
+             var todayDays =(todayMonth*30) + day_age;  
+                
+             if (DataOfBirth>today) {  
+                document.getElementById("result2").innerHTML = ("Invalid date input - Please try again!");  
+                document.getElementById("result").innerHTML ="";
+              }  
+              else {  
+                document.getElementById("result").innerHTML = year_age + " years " + month_age + " months " + day_age + " days"  
+             
+                document.getElementById("result2").innerHTML ="";
+            }  
+           }  
+        }  
+        </script>  
+    </html>  
